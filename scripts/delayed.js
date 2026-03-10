@@ -1,7 +1,7 @@
 /* eslint-disable func-names */
 // eslint-disable-next-line import/no-cycle
 /* eslint-disable no-undef */
-import { sampleRUM } from './aem.js';
+import { sampleRUM, loadScript } from './aem.js';
 import { environmentMode } from './global-functions.js';
 
 // Core Web Vitals RUM collection
@@ -167,6 +167,14 @@ function loadGTM() {
   document.head.prepend(scriptTag);
 }
 
+function addCookieBanner() {
+  const cookieBanner = document.createElement('div');
+  cookieBanner.id = 'consent-banner';
+  cookieBanner.innerHTML = `<div id="teconsent"></div>
+</div>`;
+  document.querySelector('main').append(cookieBanner);
+}
+
 if (!window.location.hostname.includes('localhost') && environmentMode() === 'publish') {
   // Load GTM
   loadGTM();
@@ -177,4 +185,8 @@ if (!window.location.hostname.includes('localhost') && environmentMode() === 'pu
   // Load Drift Chat Widget & Events
   loadDriftChatWidget();
   dirftChatEventListener();
+
+  // trustarc
+  addCookieBanner();
+  loadScript('https://consent.trustarc.com/v2/notice/jwqzim');
 }
