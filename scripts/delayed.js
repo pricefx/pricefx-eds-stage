@@ -172,7 +172,7 @@ function addCookieBanner() {
     const cookieBanner = document.createElement('div');
     cookieBanner.id = 'consent-banner';
     cookieBanner.innerHTML = `<div id="teconsent"></div>`;
-    document.querySelector('main').append(cookieBanner);
+    document.querySelector('head').append(cookieBanner);
     resolve();
   });
 }
