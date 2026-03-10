@@ -168,11 +168,13 @@ function loadGTM() {
 }
 
 function addCookieBanner() {
-  const cookieBanner = document.createElement('div');
-  cookieBanner.id = 'consent-banner';
-  cookieBanner.innerHTML = `<div id="teconsent"></div>
-</div>`;
-  document.querySelector('main').append(cookieBanner);
+  return new Promise((resolve) => {
+    const cookieBanner = document.createElement('div');
+    cookieBanner.id = 'consent-banner';
+    cookieBanner.innerHTML = `<div id="teconsent"></div>`;
+    document.querySelector('main').append(cookieBanner);
+    resolve();
+  });
 }
 
 if (!window.location.hostname.includes('localhost') && environmentMode() === 'publish') {
@@ -187,6 +189,7 @@ if (!window.location.hostname.includes('localhost') && environmentMode() === 'pu
   dirftChatEventListener();
 
   // trustarc
-  addCookieBanner();
-  loadScript('https://consent.trustarc.com/v2/notice/jwqzim');
+  addCookieBanner().then(() => {
+    loadScript('https://consent.trustarc.com/v2/notice/jwqzim');
+  });
 }
