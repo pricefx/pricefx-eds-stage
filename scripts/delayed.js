@@ -190,6 +190,9 @@ if (!window.location.hostname.includes('localhost') && environmentMode() === 'pu
 
   // trustarc
   addCookieBanner().then(() => {
-    loadScript('https://consent.trustarc.com/v2/notice/jwqzim');
+    loadScript('https://consent.trustarc.com/v2/notice/jwqzim', {
+      type: 'text/javascript',
+      async: 'async'
+    });
   });
 }
